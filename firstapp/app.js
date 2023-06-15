@@ -8,6 +8,8 @@ const pw_auth_router = require('./routes/pwauth')
 const toDoRouter = require('./routes/todo');
 const weatherRouter = require('./routes/weather');
 const newRouter = require('./routes/first');
+const listrouter = require('./routes/List');
+const methodOverride = require('method-override');
 
 const User = require('./models/User');
 
@@ -88,6 +90,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride("_method"));
+
 
 
 
@@ -110,6 +114,7 @@ app.get('/about',
 app.use(toDoRouter);
 app.use(weatherRouter);
 app.use(newRouter);
+app.use(listrouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

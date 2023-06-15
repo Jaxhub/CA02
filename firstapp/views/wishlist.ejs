@@ -1,0 +1,85 @@
+<!-- wishlist.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fakemons</title>
+    <style>
+    body {
+        background-image: url('/images/pokemon.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        text-align: left;
+        padding: 8px;
+      }
+      th {
+        background-color: #4285f4;
+        color: rgb(230, 24, 21);
+      }
+      tr:nth-child(even) {
+        background-color: #10f449;
+      }
+      tr:nth-child(odd) {
+        background-color: #c0ee07;
+      }
+      .table-header {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Wacky Fakemon Team Creator</h1>
+
+    <table>
+      <tr class="table-header">
+        <th>Pokémon </th>
+        <th>Ability</th>
+        <th>Type 1</th>
+        <th>Type 2</th>
+      </tr>
+      <% pokemon.forEach(function(mondata, index) { %>
+        <tr>
+          <td><%= mondata.pokemon %></td>
+          <td><%= mondata.ability %></td>
+          <td><%= mondata.type1 %></td>
+          <td><%= mondata.type2 %></td>
+        </tr>
+      <% }); %>
+    </table>
+    <br>
+    <br>
+    <form method="POST" action="/wishlist">
+        <button type="submit">Generate team</button>
+    </form>
+    <br>
+    <br>
+    <div class="button-container">
+        <form method="POST" action="/wishlist/save">
+          <label for="fileName">File Name:</label>
+          <input type="text" name="fileName" id="fileName" required>
+          <button type="submit">Save Team</button>
+        </form>
+        <br>
+        <br>
+        <form method="GET" action="/wishlist/display">
+            <label for="teamID">Team ID:</label>
+            <input type="text" name="teamID" id="teamID" required>
+            <button type="submit">Display Team</button>
+        </form>
+        <br>
+        <br>
+        <form method="GET" action="/wishlist/delete">
+            <label for="teamIdToDelete">Team to Delete:</label>
+            <input type="text" name="teamID" id="teamIdToDelete" required>
+            <button type="submit">Delete Team</button>
+        </form>
+    </div>
+
+  </body>
+</html>
